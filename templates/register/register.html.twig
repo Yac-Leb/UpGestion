@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+{% endblock %}
+
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<h1>Inscription</h1>
+
+{{ form_start(registerForm) }}
+    {{ form_row(registerForm.mail) }}
+    {{ form_row(registerForm.prenom) }}
+    {{ form_row(registerForm.nom) }}
+    {{ form_row(registerForm.plainPassword) }}
+
+    <button class="btn">S'inscrire</button>
+{{ form_end(registerForm) }}
+
+{% endblock %}
