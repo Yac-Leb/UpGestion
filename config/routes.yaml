@@ -5,6 +5,6 @@ controllers:
     type: attribute
 
 # route pour la page d'accueil
-home:
+app_home:
     path: /
     controller: App\Controller\HomeController::index

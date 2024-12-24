@@ -1,0 +1,293 @@
+/* BODY */
+body{
+    background-color: #e3dfee;
+    color: #084B8E;
+}
+
+/* Base.html */
+.top-bar {
+    background-color: #333;
+    padding: 10px 0; 
+    text-align: center;
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+}
+
+.top-bar .btn {
+    color: white; 
+    text-decoration: none; 
+    font-size: 16px; 
+    padding: 8px 16px; 
+    border: 1px solid white; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+.top-bar .btn:hover {
+    background-color: #444; 
+}
+
+
+
+/* Bouton primaire */
+.btn_primary {
+    background-color: #bcd6f7; /* $pale-blue */
+    color: #ffffff; /* $white */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #bcd6f7; /* $pale-blue */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_primary:hover {
+    cursor: pointer;
+    background-color: #3d74f7; /* $fun-blue */
+    color: #ffffff; /* $white */
+    border: 1px solid #3d74f7; /* $fun-blue */
+}
+
+/* Bouton primaire outline */
+.btn_primary_outline {
+    background-color: #ffffff; /* $white */
+    color: #bcd6f7; /* $pale-blue */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #bcd6f7; /* $pale-blue */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_primary_outline:hover {
+    cursor: pointer;
+    background-color: #bcd6f7; /* $pale-blue */
+    color: #ffffff; /* $white */
+    border: 1px solid #bcd6f7; /* $pale-blue */
+}
+
+/* Bouton secondaire */
+.btn_secondary {
+    background-color: #ff8c00; /* $orange */
+    color: #333333; /* $on-orange */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ff8c00; /* $orange */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_secondary:hover {
+    cursor: pointer;
+    background-color: #ff5b00; /* $fun-orange */
+    color: #ffffff; /* $white */
+    border: 1px solid #ff5b00; /* $fun-orange */
+}
+
+/* Bouton secondaire outline */
+.btn_secondary_outline {
+    background-color: #ffffff; /* $white */
+    color: #ff8c00; /* $orange */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ff8c00; /* $orange */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_secondary_outline:hover {
+    cursor: pointer;
+    background-color: #ff8c00; /* $orange */
+    color: #ffffff; /* $white */
+    border: 1px solid #ff8c00; /* $orange */
+}
+
+/* Bouton danger */
+.btn_danger {
+    background-color: #ff0000; /* $red */
+    color: #ffffff; /* $white */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ff0000; /* $red */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_danger:hover {
+    cursor: pointer;
+    background-color: #8b0000; /* $darkred */
+    color: #ffffff; /* $white */
+    border: 1px solid #8b0000; /* $darkred */
+}
+
+/* Bouton danger outline */
+.btn_danger_outline {
+    background-color: #ffffff; /* $white */
+    color: #ff0000; /* $red */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ff0000; /* $red */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_danger_outline:hover {
+    cursor: pointer;
+    background-color: #ff0000; /* $red */
+    color: #ffffff; /* $white */
+    border: 1px solid #ff0000; /* $red */
+}
+
+/* Bouton success */
+.btn_success {
+    background-color: #28a745; /* $success */
+    color: #ffffff; /* $white */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #28a745; /* $success */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_success:hover {
+    cursor: pointer;
+    background-color: #1e7e34; /* $darkgreen */
+    color: #ffffff; /* $white */
+    border: 1px solid #1e7e34; /* $darkgreen */
+}
+
+/* Bouton success outline */
+.btn_success_outline {
+    background-color: #ffffff; /* $white */
+    color: #28a745; /* $success */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #28a745; /* $success */
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_success_outline:hover {
+    cursor: pointer;
+    background-color: #28a745; /* $success */
+    color: #ffffff; /* $white */
+    border: 1px solid #28a745; /* $success */
+}
+
+/* Checkbox alternatif */
+input[type=checkbox].alternative_checkbox {
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    height: 25px;
+    width: 50px;
+    background-color: #ffffff; /* $white */
+    border-radius: 5rem;
+    transition: background-color .2s;
+    box-shadow: 0 0 15px #0000001e;
+}
+
+input[type=checkbox].alternative_checkbox::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(47, 47, 68);
+    transition: left .2s;
+}
+
+input[type=checkbox].alternative_checkbox:checked {
+    background-color: #62f7ad; /* #62f7ad */
+}
+
+input[type=checkbox].alternative_checkbox:checked::after {
+    left: 70%;
+}
+
+/* Bouton discret */
+.btn_discret {
+    background-color: none;
+    color: #bcd6f7; /* $pale-blue */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgba(1,1,1,0);
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_discret:hover {
+    cursor: pointer;
+    background-color: none;
+    color: #bcd6f7; /* $pale-blue */
+    border: 1px solid #bcd6f7; /* $pale-blue */
+}
+
+/* Bouton discret danger */
+.btn_discret_danger {
+    background-color: none;
+    color: #bcd6f7; /* $pale-blue */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgba(1,1,1,0);
+    padding: 10px;
+    margin: 1px;
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+.btn_discret_danger:hover {
+    cursor: pointer;
+    background-color: none;
+    color: #8b0000; /* $darkred */
+    border: 1px solid #8b0000; /* $darkred */
+}
+
+/* Message de prescription */
+.prescription_message {
+    text-align: center;
+}

@@ -1,44 +1,19 @@
 security:
-    # Gestion des hashers de mot de passe (Symfony 5.x+)
     password_hashers:
-        App\Entity\User:
-            # Utilisation de l'algorithme "auto" pour choisir le meilleur disponible
-            algorithm: auto
-
-    # Définition du fournisseur d'utilisateurs
+            App\Entity\User:
+                algorithm: bcrypt
+                cost: 12
+    # Fournisseurs d'utilisateurs (vide pour l'instant)
     providers:
-        app_user_provider:
-            # Utilisation de l'entité User avec l'email comme identifiant
-            entity:
-                class: App\Entity\User
-                property: mail  # Utilisation de l'email comme identifiant unique
+        in_memory: { memory: null }
 
-    # Configuration des firewalls (protection des pages)
+    # Le firewall gère les zones sécurisées de l'application
     firewalls:
-        # Définition du firewall principal
+        # Le firewall principal (toutes les pages accessibles sans connexion)
         main:
-            # Formulaire de connexion
-            form_login:
-                login_path: app_login  # URL pour accéder à la page de connexion
-                check_path: app_login  # URL pour vérifier le formulaire de connexion
-                username_parameter: mail  # Paramètre utilisé pour l'authentification (ici l'email)
-                default_target_path: /  # Où rediriger après la connexion réussie (accueil)
+            stateless: true
+            # Cela permet d'accepter toutes les requêtes sans authentification.
+            # Aucune règle d'authentification spécifique appliquée ici.
 
-            # Déconnexion
-            logout:
-                path: /logout  # URL de déconnexion
-                target: /  # Redirection après déconnexion vers la page d'accueil
-
-            # Authentification activée pour tout le reste du site
-            # Permet de protéger l'accès à certaines pages
-            security: true
-
-    # Contrôle d'accès (qui peut accéder à quoi)
-    access_control:
-        # Accès à la page d'administration réservé aux administrateurs
-        - { path: ^/admin, roles: ROLE_ADMIN }  # Seuls les utilisateurs avec le rôle ROLE_ADMIN peuvent accéder à /admin
-        # Accès à la page de profil réservé aux utilisateurs connectés
-        - { path: ^/profile, roles: ROLE_USER }  # Seuls les utilisateurs avec le rôle ROLE_USER peuvent accéder à /profile
-        # Permet l'accès à la page de connexion et d'inscription sans être connecté
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    # Aucune restriction d'accès n'est définie
+    access_control: []

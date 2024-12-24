@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RegisterController extends AbstractController
 {
@@ -19,15 +20,40 @@ class RegisterController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
+        // Créer un nouvel utilisateur
         $user = new User();
 
-        // Créer le formulaire d'inscription
+        // Si la requête est en JSON
+        if ($request->isMethod('POST') && $request->headers->get('Content-Type') === 'application/json') {
+            $data = json_decode($request->getContent(), true);
+
+            // Vérifiez que les données sont présentes
+            if (empty($data['mail']) || empty($data['prenom']) || empty($data['nom']) || empty($data['plainPassword'])) {
+                return new JsonResponse(['error' => 'Données manquantes.'], 400);
+            }
+
+            // Remplir les données de l'utilisateur
+            $user->setMail($data['mail']);
+            $user->setNom($data['nom']);
+            $user->setPrenom($data['prenom']);
+            $user->setPassword(
+                $passwordHasher->hashPassword($user, $data['plainPassword'])
+            );
+
+            // Sauvegarder l'utilisateur dans la base de données
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Retourner une réponse JSON avec un message de succès
+            return new JsonResponse(['message' => 'Inscription réussie'], 200);
+        }
+
+        // Si la requête n'est pas en JSON, il s'agit d'un formulaire HTML classique
         $form = $this->createForm(RegisterFormType::class, $user);
         $form->handleRequest($request);
 
-        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encoder le mot de passe
+            // Hacher le mot de passe
             $user->setPassword(
                 $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData())
             );
@@ -36,13 +62,14 @@ class RegisterController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Message de succès
+            // Ajouter un message flash de succès
             $this->addFlash('success', 'Votre inscription a été réussie !');
 
+            // Rediriger vers la page de connexion
             return $this->redirectToRoute('app_login');
         }
 
-        // Afficher le formulaire
+        // Afficher le formulaire d'inscription dans un navigateur
         return $this->render('register/register.html.twig', [
             'registerForm' => $form->createView(),
         ]);
