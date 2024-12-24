@@ -1,19 +1,22 @@
-{% extends 'base.html.twig' %}
-
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/login/login.css') }}">
 {% endblock %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<h1>Connexion</h1>
+    <h1>Connexion</h1>
 
-{{ form_start(loginForm) }}
-    {{ form_row(loginForm.mail) }}
-    {{ form_row(loginForm.plainPassword) }}
-    <button class="btn">Se connecter</button>
-{{ form_end(loginForm) }}
+    {{ form_start(loginForm) }}
+        {{ form_row(loginForm._username) }} <!-- Utilisation de _username pour l'email -->
+        {{ form_row(loginForm._password) }} <!-- Utilisation de _password pour le mot de passe -->
+        <button class="btn">Se connecter</button>
+    {{ form_end(loginForm) }}
 
-{# <p>Pas encore de compte ? <a href="{{ path('register') }}">Inscrivez-vous ici</a>.</p> #}
+    {# Affichage des erreurs de connexion (mauvais identifiants) #}
+    {% if app.session.flashbag().has('error') %}
+        <div class="alert alert-danger">
+            {{ app.session.flashbag().get('error')[0] }}
+        </div>
+    {% endif %}
 {% endblock %}

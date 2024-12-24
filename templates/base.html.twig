@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
+        <!-- Ajouter les feuilles de style CSS -->
         {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <!-- Intégration de jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <!-- Barre de navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <!-- Texte à gauche -->
+                <span class="navbar-text">
+                    Bienvenue sur notre site
+                </span>
+
+                <!-- Logo centré -->
+                <div class="mx-auto">
+                    <img src="{{ asset('images/Paris_Saint-Germain_Logo.svg.png') }}" alt="Logo" style="height: 100px;">
+                </div>
+
+                <!-- Boutons à droite pour l'utilisateur non connecté -->
+                <div class="ml-auto">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <!-- Si l'utilisateur est connecté -->
+                        <a href="{{ path('_logout_main') }}" class="btn btn-outline-danger">Déconnexion</a>
+                    {% else %}
+                        <!-- Si l'utilisateur n'est pas connecté -->
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connexion</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-success ml-2">Inscription</a>
+                    {% endif %}
+                </div>                
+            </div>
+        </nav>
+
+        <!-- Contenu principal -->
+        <div class="container mt-4">
+            {% block body %}{% endblock %}
+        </div>
+
+        <!-- Scripts JavaScript -->
+        {% block javascripts %}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        {% endblock %}
     </body>
 </html>

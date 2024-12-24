@@ -2,73 +2,43 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\LoginFormType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\PasswordHasherInterface; // Vérifiez l'importation correcte
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class LoginController extends AbstractController
 {
-    /**
-     * Route GET pour afficher le formulaire de connexion
-     */
-    #[Route('/login', name: 'app_login', methods: ['GET'])]
-    public function showLoginForm(): Response
+    private $passwordHasher;
+
+    public function __construct(PasswordHasherInterface $passwordHasher)
     {
-        // Créer et afficher le formulaire de connexion
-        $form = $this->createForm(LoginFormType::class);
-        return $this->render('register/login.html.twig', [
-            'loginForm' => $form->createView(),
-        ]);
+        $this->passwordHasher = $passwordHasher;
     }
 
     /**
-     * Route POST pour traiter la soumission du formulaire de connexion
+     * @Route("/login", name="app_login")
      */
-    #[Route('/login', name: 'login_check', methods: ['POST'])]
-    public function login(
-        Request $request, 
-        EntityManagerInterface $entityManager, 
-        UserPasswordHasherInterface $passwordHasher // Correct dependency injection
-    ): Response
+    public function login(Request $request)
     {
-        // Créer le formulaire de connexion
-        $form = $this->createForm(LoginFormType::class);
-        $form->handleRequest($request);
+        // Récupérer l'email et le mot de passe depuis le formulaire
+        $email = $request->get('email');
+        $password = $request->get('password');
 
-        // Si le formulaire est soumis et valide
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Extraire les données du formulaire
-            $data = $form->getData();
-            $email = $data['mail'];
-            $plainPassword = $form->get('plainPassword')->getData();
+        // Récupérer l'utilisateur et vérifier le mot de passe
+        $user = $this->getDoctrine()
+                     ->getRepository(User::class)
+                     ->findOneByEmail($email);
 
-            // Rechercher l'utilisateur dans la base de données
-            $user = $entityManager->getRepository(User::class)->findOneBy(['mail' => $email]);
-
-            // Vérifier si l'utilisateur existe
-            if (!$user) {
-                $this->addFlash('error', 'Utilisateur non trouvé.');
-                return $this->redirectToRoute('app_login');
-            }
-
-            // Vérifier le mot de passe
-            if (!$passwordHasher->isPasswordValid($user, $plainPassword)) {
-                $this->addFlash('error', 'Mot de passe incorrect.');
-                return $this->redirectToRoute('app_login');
-            }
-
-            // Connexion réussie - Redirection vers 'app_register'
-            $this->addFlash('success', 'Connexion réussie.');
-            return $this->redirectToRoute('app_register'); // Redirection vers la page 'app_register'
+        if ($user && $this->passwordHasher->isPasswordValid($user, $password)) {
+            // Authentification réussie
+            // Vous pouvez rediriger l'utilisateur vers une page sécurisée, par exemple :
+            return $this->redirectToRoute('home');
         }
 
-        // Si le formulaire n'est pas valide ou soumis
-        $this->addFlash('error', 'Veuillez remplir correctement le formulaire.');
-        return $this->redirectToRoute('app_login');
+        // Si la connexion échoue
+        return $this->render('security/login.html.twig', [
+            'error' => 'Email ou mot de passe incorrect',
+        ]);
     }
 }
