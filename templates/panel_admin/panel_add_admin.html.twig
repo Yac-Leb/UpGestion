@@ -1,0 +1,57 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+    <!-- Formulaire de recherche -->
+    <form method="get" action="{{ path('admin_add_admin') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Rechercher par nom, prénom ou email" value="{{ app.request.query.get('search') }}">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </div>
+    </form>
+
+    <!-- Affichage des messages flash -->
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Rôle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.mail }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <!-- Affichage d'un menu déroulant pour les rôles -->
+                    <td>
+                        <form method="POST" action="{{ path('admin_update_role', { id: user.id }) }}">
+                            <select name="role" onchange="this.form.submit()">
+                                <option value="ROLE_USER" {% if 'ROLE_USER' in user.roles %} selected {% endif %}>ROLE_USER</option>
+                                <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %} selected {% endif %}>ROLE_ADMIN</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_delete_user', { id: user.id }) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun utilisateur trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

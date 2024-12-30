@@ -1,22 +1,37 @@
-{% block stylesheets %}
-    {# <link rel="stylesheet" href="{{ asset('styles/login/login.css') }}"> #}
-{% endblock %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Me connecter{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-    {{ form_start(loginForm) }}
-        {{ form_row(loginForm._username) }} <!-- Utilisation de _username pour l'email -->
-        {{ form_row(loginForm._password) }} <!-- Utilisation de _password pour le mot de passe -->
-        <button class="btn">Se connecter</button>
-    {{ form_end(loginForm) }}
-
-    {# Affichage des erreurs de connexion (mauvais identifiants) #}
-    {% if app.session.flashbag().has('error') %}
-        <div class="alert alert-danger">
-            {{ app.session.flashbag().get('error')[0] }}
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputMail">Mail</label>
+    <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" autocomplete="username" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Remember me
+        </label>
+    </div>
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
 {% endblock %}

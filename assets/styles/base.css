@@ -2,6 +2,10 @@
 body{
     background-color: #e3dfee;
     color: #084B8E;
+    font-family: 'Baskerville', 'Georgia', 'Times', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* Base.html */

@@ -26,6 +26,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $password = null;
+    
+    #[ORM\Column(type:"array")]
+    private array $roles = [];  // Tableau des rôles
+
+    // Méthode pour obtenir les rôles de l'utilisateur
+    public function getRoles(): array
+    {
+        // Retourner les rôles de l'utilisateur, en ajoutant un rôle par défaut 'ROLE_USER' si aucun autre rôle n'est défini
+        return array_merge($this->roles, ['ROLE_USER']);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
+    }
 
     // Méthode pour obtenir l'ID
     public function getId(): ?int
@@ -88,11 +104,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     // Implémentation de UserInterface
-    public function getRoles(): array
-    {
-        return ['ROLE_USER']; // Rôle par défaut de l'utilisateur
-    }
-
     public function eraseCredentials(): void
     {
         // On peut laisser vide si on ne gère pas de données sensibles autres que le mot de passe

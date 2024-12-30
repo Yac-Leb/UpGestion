@@ -2,13 +2,13 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">      
 
         {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
-
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            
         {% endblock %}
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -17,16 +17,23 @@
     <body>
         <nav class="top-bar">
             <div class="container">
-                <a href="#" class="btn">Boutique</a>
-                <a href="#" class="btn">PSG.FR</a>
+                <a href="{{ path('app_boutique') }}" class="btn">Boutique</a>
+                <a href="{{ path('app_home') }}" class="btn">PSG.FR</a>
                 <a href="#" class="btn">Classement</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2">Admin Panel</a>
+                {% endif %}
             </div>
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <span class="navbar-text">
-                    Bienvenue sur notre site
-                </span>
+                {% if app.user %}
+                    <span class="navbar-text">Bienvenue {{ app.user.nom }} {{ app.user.prenom }} !</span>
+                    <p></p>
+                {% else %}
+                    <span class="navbar-text">Bienvenue sur notre site</span>
+                {% endif %}
+
 
                 <!-- Centrer l'image avec d-flex et justify-content-center -->
                 <div class="d-flex justify-content-center flex-grow-1">

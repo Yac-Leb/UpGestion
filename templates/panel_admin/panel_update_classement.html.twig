@@ -1,0 +1,64 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+    <h1>Mise à jour du classement</h1>
+    <p>Gérez ici le classement des équipes.</p>
+
+    <!-- Tableau des équipes -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Nom de l'équipe</th>
+                <th>Points</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="teamsTable">
+            {% for team in teams %}
+                <tr>
+                    <td><img src="{{ asset(team.logo) }}" alt="Logo" width="50"></td>
+                    <td>{{ team.name }}</td>
+                    <td>{{ team.points }}</td>
+                    <td>
+                        <!-- Appel de la fonction JavaScript -->
+                        <button onclick="editTeam('{{ loop.index0 }}', '{{ team.name }}', '{{ team.points }}')">Modifier</button>
+                        <form action="{{ path('admin_delete_team', {'index': loop.index0}) }}" method="post" style="display:inline;">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Formulaire pour ajouter ou modifier une équipe -->
+    <h2 id="formTitle">Ajouter une équipe</h2>
+    <form id="teamForm" action="{{ path('admin_update_ranking') }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="teamIndex" name="teamIndex" value="">
+
+        <label for="teamName">Nom de l'équipe :</label>
+        <input type="text" id="teamName" name="teamName" required>
+
+        <label for="teamLogo">Logo de l'équipe :</label>
+        <input type="file" id="teamLogo" name="teamLogo" accept="image/*">
+
+        <label for="teamPoints">Points :</label>
+        <input type="number" id="teamPoints" name="teamPoints" required>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <!-- Ajout de la fonction JavaScript ici -->
+    <script>
+        function editTeam(index, name, points) {
+            // Remplir les champs du formulaire avec les informations existantes
+            document.getElementById('teamIndex').value = index;
+            document.getElementById('teamName').value = name;
+            document.getElementById('teamPoints').value = points;
+
+            // Modifier le titre pour indiquer qu'on est en mode édition
+            document.getElementById('formTitle').innerText = 'Modifier une équipe';
+        }
+    </script>
+{% endblock %}

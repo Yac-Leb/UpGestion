@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">      
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+            <link rel="stylesheet" href="{{ asset('styles/admin_panel/panel_dashboard.css') }}">
+
+        {% endblock %}
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <a href="{{ path('app_home') }}">
+                <i class="fas fa-home"></i><span class="material-symbols-outlined">home</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Accueil</span>
+            </a>
+            <a href="{{ path('app_panel_dashboard') }}" class="{% if app.request.get('_route') == 'app_panel_dashboard' %}btn_primary{% endif %}">
+                <i class="fas fa-tachometer-alt"></i><span class="material-symbols-outlined">dashboard</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Admin Panel</span>
+            </a>
+            <a href="{{ path('admin_add_shop') }}" class="{% if app.request.get('_route') == 'admin_add_shop' or app.request.get('_route') == 'admin_shop' %}btn_primary{% endif %}">
+                <i class="fas fa-store"></i><span class="material-symbols-outlined">shopping_cart</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Boutique</span>
+            </a>
+            <a href="{{ path('admin_add_admin') }}" class="{% if app.request.get('_route') == 'admin_add_admin' %}btn_primary{% endif %}">
+                <i class="fas fa-user-plus"></i><span class="material-symbols-outlined">person</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Admin</span>
+            </a>
+            <a href="{{ path('admin_update_ranking') }}" class="{% if app.request.get('_route') == 'admin_update_ranking' %}btn_primary{% endif %}">
+                <i class="fas fa-trophy"></i><span class="material-symbols-outlined">sort</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Classement</span>
+            </a>
+        </div>
+
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/boutique.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Notre Boutique de T-Shirts</h1>
+    <div class="product-grid">
+        {% for article in articles %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ asset('images/boutique/' ~ article.premiereImage) }}" 
+                         alt="{{ article.titre }}" 
+                         id="article{{ article.id }}" 
+                         data-images='["{{ asset('images/boutique/' ~ article.premiereImage) }}", "{{ asset('images/boutique/' ~ article.deuxiemeImage) }}"]'>
+
+                    <button class="arrow left" onclick="changeImage('#article{{ article.id }}', -1)">&#8249;</button>
+                    <button class="arrow right" onclick="changeImage('#article{{ article.id }}', 1)">&#8250;</button>
+                </div>
+                <div class="product-info">
+                    <h3>{{ article.titre }}</h3>
+                    <p>{{ article.description }}</p>
+                    <p class="price">{{ article.prix }}€</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function changeImage(selector, direction) {
+        var img = document.querySelector(selector);
+        var images = JSON.parse(img.getAttribute('data-images'));
+        var currentSrc = img.getAttribute('src');
+        var currentIndex = images.indexOf(currentSrc);
+
+        var nextIndex = (currentIndex + direction + images.length) % images.length;
+        img.setAttribute('src', images[nextIndex]);
+    }
+</script>
+{% endblock %}

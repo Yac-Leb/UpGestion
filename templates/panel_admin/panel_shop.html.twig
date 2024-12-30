@@ -1,0 +1,46 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Tous les Articles{% endblock %}
+
+{% block body %}
+<h1>Liste des Articles</h1>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Première Image</th>
+            <th>Deuxième Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.prix }}</td>
+                <td>{{ article.description }}</td>
+                <td><img src="/assets/images/boutique/{{ article.premiereImage }}" alt="Image 1" width="50"></td>
+                <td><img src="/assets/images/boutique/{{ article.deuxiemeImage }}" alt="Image 2" width="50"></td>
+                <td>
+                    <a href="{{ path('admin_edit_article', {id: article.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <form action="{{ path('admin_delete_article', {id: article.id}) }}" method="POST" style="display:inline-block;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
