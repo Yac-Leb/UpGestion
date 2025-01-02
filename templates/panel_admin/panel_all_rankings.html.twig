@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les Classements{% endblock %}
+
+{% block body %}
+<h1>Tous les Classements</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Classement</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for classement in classements %}
+            <tr>
+                <td>{{ classement.date|date('Y-m-d H:i:s') }}</td>
+                <td>
+                    <ul>
+                        {% for team in classement.classement %}
+                            <li>{{ team.name }} - {{ team.points }} points</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

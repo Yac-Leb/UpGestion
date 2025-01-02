@@ -13,12 +13,12 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-
+    
     <body>
         <nav class="top-bar">
             <div class="container">
-                <a href="{{ path('app_boutique') }}" class="btn">Boutique</a>
                 <a href="{{ path('app_home') }}" class="btn">PSG.FR</a>
+                <a href="{{ path('app_boutique') }}" class="btn">Boutique</a>
                 <a href="#" class="btn">Classement</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2">Admin Panel</a>
@@ -35,7 +35,6 @@
                 {% endif %}
 
 
-                <!-- Centrer l'image avec d-flex et justify-content-center -->
                 <div class="d-flex justify-content-center flex-grow-1">
                     <img src="{{ asset('images/Paris_Saint-Germain_Logo.svg.png') }}" alt="Logo" style="height: 100px;">
                 </div>
@@ -52,8 +51,15 @@
             </div>
         </nav>
 
+        {% block body %}{% endblock %}
 
-            {% block body %}{% endblock %}
+        <!-- Bloc pour la section "end page" -->
+        <footer class="bg-dark text-white mt-5">
+            <div class="container text-center py-3">
+                <p class="text-white">&copy; 2025 PSG.FR - Tous droits réservés.</p>
+                <p><a  class="text-white">Contactez-nous</a> | <a  class="text-white">Mentions légales</a></p>
+            </div>
+        </footer>
 
         {% block javascripts %}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

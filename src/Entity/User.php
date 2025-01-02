@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -113,5 +114,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->mail; // Utilisation de l'email comme identifiant unique
+    }
+    public function findAdmins()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('JSON_CONTAINS(u.roles, :role) = 1')
+            ->setParameter('role', '"ROLE_ADMIN"')
+            ->getQuery()
+            ->getResult();
     }
 }

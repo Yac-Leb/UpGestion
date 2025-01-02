@@ -7,7 +7,7 @@
 
 {% block body %}
 <div class="container">
-    <h1>Notre Boutique de T-Shirts</h1>
+    <h1>Notre Boutique</h1>
     <div class="product-grid">
         {% for article in articles %}
             <a href="{{ path('article_detail', {'id': article.id}) }}" class="product-link">
@@ -18,8 +18,8 @@
                              id="article{{ article.id }}" 
                              data-images='["{{ asset('images/boutique/' ~ article.premiereImage) }}", "{{ asset('images/boutique/' ~ article.deuxiemeImage) }}"]'>
 
-                        <button class="arrow left" onclick="changeImage('#article{{ article.id }}', -1)">&#8249;</button>
-                        <button class="arrow right" onclick="changeImage('#article{{ article.id }}', 1)">&#8250;</button>
+                        <button class="arrow left" onclick="changeImage(event, '#article{{ article.id }}', -1)">&#8249;</button>
+                        <button class="arrow right" onclick="changeImage(event, '#article{{ article.id }}', 1)">&#8250;</button>
                     </div>
                     <div class="product-info">
                         <h3>{{ article.titre }}</h3>
@@ -33,7 +33,8 @@
 </div>
 
 <script>
-    function changeImage(selector, direction) {
+    function changeImage(event, selector, direction) {
+        event.preventDefault();  // Empêche la redirection du lien
         var img = document.querySelector(selector);
         var images = JSON.parse(img.getAttribute('data-images'));
         var currentSrc = img.getAttribute('src');

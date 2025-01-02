@@ -18,9 +18,28 @@ class AdminDashboardController extends AbstractController
     // route pour accéder au dashboard de l'admin
     #[Route('/admin/dashboard', name: 'app_panel_dashboard')]
     #[IsGranted('ROLE_ADMIN')]
-    public function index(): Response
+    public function dashboard(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('panel_admin/panel_dashboard.html.twig');
+        // Récupérer les admins
+        $admins = $entityManager->getRepository(User::class)->findAdmins();
+        
+        // Récupérer les articles
+        $articles = $entityManager->getRepository(Article::class)->findAll();
+        $classementRepo = $entityManager->getRepository(Classement::class);
+        $classementEntity = $classementRepo->findOneBy([], ['date' => 'DESC']);
+    
+        $teams = $classementEntity ? $classementEntity->getClassement() : [];
+    
+        // Trier les équipes par points de manière décroissante
+        usort($teams, function ($a, $b) {
+            return $b['points'] <=> $a['points']; // Trier par points de manière décroissante
+        });
+        // Passer les données à la vue
+        return $this->render('panel_admin/panel_dashboard.html.twig', [
+            'admins' => $admins,
+            'articles' => $articles,
+            'classement' => $teams
+        ]);
     }
 
         #[Route('/admin/shop', name: 'admin_shop')]
@@ -118,28 +137,35 @@ class AdminDashboardController extends AbstractController
     }
 
     // route pour ajouter un admin
-    #[Route('/admin/add-admin', name: 'admin_add_admin')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function addAdmin(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $searchTerm = $request->query->get('search');
+#[Route('/admin/add-admin', name: 'admin_add_admin')]
+#[IsGranted('ROLE_ADMIN')]
+public function addAdmin(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $searchTerm = $request->query->get('search');
 
-        if ($searchTerm) {
-            $users = $entityManager->getRepository(User::class)->createQueryBuilder('u')
-                ->where('u.mail LIKE :searchTerm')
-                ->orWhere('u.nom LIKE :searchTerm')
-                ->orWhere('u.prenom LIKE :searchTerm')
-                ->setParameter('searchTerm', '%' . $searchTerm . '%')
-                ->getQuery()
-                ->getResult();
-        } else {
-            $users = $entityManager->getRepository(User::class)->findAll();
-        }
+    if ($searchTerm) {
+        $users = $entityManager->getRepository(User::class)->createQueryBuilder('u')
+            ->where('u.mail LIKE :searchTerm')
+            ->orWhere('u.nom LIKE :searchTerm')
+            ->orWhere('u.prenom LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->getQuery()
+            ->getResult();
+    } else {
+        $users = $entityManager->getRepository(User::class)->findAll();
+    }
 
-        return $this->render('panel_admin/panel_add_admin.html.twig', [
+    if ($request->isXmlHttpRequest()) {
+        return $this->render('panel_admin/_user_list.html.twig', [
             'users' => $users,
         ]);
     }
+
+    return $this->render('panel_admin/panel_add_admin.html.twig', [
+        'users' => $users,
+    ]);
+}
+
 
     // route pour mettre à jour le rôle d'un utilisateur
     #[Route('/admin/update-role/{id}', name: 'admin_update_role', methods: ['POST'])]
@@ -275,6 +301,19 @@ public function updateRanking(Request $request, EntityManagerInterface $entityMa
 
         // Rediriger vers la page du classement après la suppression
         return $this->redirectToRoute('admin_update_ranking');
+    }
+
+    #[Route('/admin/all-rankings', name: 'admin_all_rankings')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function allRankings(EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer tous les classements
+        $classements = $entityManager->getRepository(Classement::class)->findBy([], ['date' => 'DESC']);
+
+        // Passer les classements à la vue
+        return $this->render('panel_admin/panel_all_rankings.html.twig', [
+            'classements' => $classements,
+        ]);
     }
 
 }

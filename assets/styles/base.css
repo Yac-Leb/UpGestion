@@ -62,10 +62,10 @@ body{
 /* Bouton primaire outline */
 .btn_primary_outline {
     background-color: #ffffff; /* $white */
-    color: #bcd6f7; /* $pale-blue */
+    color: #084B8E; /* $pale-blue */
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid #bcd6f7; /* $pale-blue */
+    border: 1px solid #084B8E; /* $pale-blue */
     padding: 10px;
     margin: 1px;
     display: inline-flex;
@@ -76,9 +76,9 @@ body{
 
 .btn_primary_outline:hover {
     cursor: pointer;
-    background-color: #bcd6f7; /* $pale-blue */
+    background-color: #084B8E; /* $pale-blue */
     color: #ffffff; /* $white */
-    border: 1px solid #bcd6f7; /* $pale-blue */
+    border: 1px solid #084B8E; /* $pale-blue */
 }
 
 /* Bouton secondaire */

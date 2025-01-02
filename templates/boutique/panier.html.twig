@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/panier.css') }}">
+{% endblock %}
+
 {% block body %}
 <div class="container">
+    <a href="{{path ('app_home')}}" class="btn_secondary_outline" >Retour</a>
+    <a href="{{path ('app_commandes')}}" class="btn_primary_outline" >Mes commandes</a>
     <h1>Votre Panier</h1>
     {% if panier is empty %}
         <p>Votre panier est vide.</p>
@@ -37,7 +44,6 @@
         <p>Total : 
             {{ panier|reduce((carry, item) => carry + (item.prix * item.quantity), 0) }}€
         </p>
-        <!-- Bouton pour procéder au paiement -->
         <a href="{{ path('paiement') }}" class="btn btn-success">Passer au paiement via PayPal</a>
     {% endif %}
 </div>

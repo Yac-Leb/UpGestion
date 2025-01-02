@@ -84,29 +84,5 @@ class BoutiqueController extends AbstractController
     }
 
 
-    #[Route('/panier', name: 'app_panier')]
-    public function panier(SessionInterface $session): Response
-    {
-        $panier = $session->get('panier', []);
-
-        return $this->render('boutique/panier.html.twig', [
-            'panier' => $panier,
-        ]);
-    }
-
-    #[Route('/panier/supprimer/{index}', name: 'remove_from_panier')]
-    public function removeFromPanier(SessionInterface $session, int $index): Response
-    {
-        $panier = $session->get('panier', []);
-
-        if (isset($panier[$index])) {
-            unset($panier[$index]);
-            $session->set('panier', array_values($panier));
-            $this->addFlash('success', 'Article supprimé du panier.');
-        } else {
-            $this->addFlash('error', 'Article introuvable dans le panier.');
-        }
-
-        return $this->redirectToRoute('app_panier');
-    }
+    
 }

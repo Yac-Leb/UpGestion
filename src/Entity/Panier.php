@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
@@ -17,11 +16,15 @@ class Panier
     #[ORM\Column(type: Types::ARRAY)]
     private array $articles = [];
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column(type: "datetime")]
+    private ?\DateTime $date = null;
 
     #[ORM\Column]
     private ?bool $archive = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null; // Nouvelle relation avec User
 
     // Constructor to set default values
     public function __construct()
@@ -47,30 +50,43 @@ class Panier
     {
         $this->articles = $articles;
 
-        return $this;
+            return $this;
+        }
+
+        public function getDate(): ?\DateTime
+        {
+            return $this->date;
+        }
+
+        public function setDate(\DateTime $date): static
+        {
+            $this->date = $date;
+
+            return $this;
+        }
+
+        public function isArchive(): ?bool
+        {
+            return $this->archive;
+        }
+
+        public function setArchive(bool $archive): static
+        {
+            $this->archive = $archive;
+
+            return $this;
+        }
+
+        // Getter et setter pour la relation avec l'utilisateur
+        public function getUser(): ?User
+        {
+            return $this->user;
+        }
+
+        public function setUser(?User $user): static
+        {
+            $this->user = $user;
+
+            return $this;
+        }
     }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): static
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function isArchive(): ?bool
-    {
-        return $this->archive;
-    }
-
-    public function setArchive(bool $archive): static
-    {
-        $this->archive = $archive;
-
-        return $this;
-    }
-}

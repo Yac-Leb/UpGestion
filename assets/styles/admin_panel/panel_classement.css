@@ -1,0 +1,47 @@
+.table {
+    margin-top: 20px;
+}
+.form-control {
+    background-color: #e3dfee;
+}
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 50%;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+h2#formTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn i {
+    margin-right: 5px;
+}

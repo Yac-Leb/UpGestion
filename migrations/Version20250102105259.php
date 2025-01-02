@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241230233051 extends AbstractMigration
+final class Version20250102105259 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,16 @@ final class Version20241230233051 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE panier (id INT AUTO_INCREMENT NOT NULL, articles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', date DATE NOT NULL, archive TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE panier ADD user_id INT NOT NULL');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('CREATE INDEX IDX_24CC0DF2A76ED395 ON panier (user_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE panier');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2A76ED395');
+        $this->addSql('DROP INDEX IDX_24CC0DF2A76ED395 ON panier');
+        $this->addSql('ALTER TABLE panier DROP user_id');
     }
 }
