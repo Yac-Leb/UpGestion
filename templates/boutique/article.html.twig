@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/detail.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container detail-container">
+    <h1>{{ article.titre }}</h1>
+    <div class="detail-content">
+        <div class="image-gallery">
+            <img src="{{ asset('images/boutique/' ~ article.premiereImage) }}" 
+                 alt="{{ article.titre }}" 
+                 id="article-image"
+                 data-images='["{{ asset('images/boutique/' ~ article.premiereImage) }}", "{{ asset('images/boutique/' ~ article.deuxiemeImage) }}"]'>
+            <button class="arrow left" onclick="changeImage(-1)">&#8249;</button>
+            <button class="arrow right" onclick="changeImage(1)">&#8250;</button>
+        </div>
+        <div class="product-details">
+            <p class="price">{{ article.prix }}€</p>
+            <p>{{ article.description }}</p>
+
+            <form method="POST" action="{{ path('add_panier', {'id': article.id}) }}">
+                <label for="size">Taille:</label>
+                <select id="size" name="size" required>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+
+                <label for="quantity">Quantité:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
+                <button type="submit" class="add-to-cart">Ajouter au panier</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    let images = JSON.parse(document.getElementById('article-image').getAttribute('data-images'));
+    let currentIndex = 0;
+
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + images.length) % images.length;
+        document.getElementById('article-image').src = images[currentIndex];
+    }
+</script>
+{% endblock %}

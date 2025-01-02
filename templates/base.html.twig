@@ -7,8 +7,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
         {% endblock %}
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -42,6 +42,7 @@
 
                 <div class="ml-auto">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_panier') }}" class="btn btn-outline-primary"><span class="material-symbols-outlined">shopping_cart</span></a>
                         <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">Déconnexion</a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connexion</a>
