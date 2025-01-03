@@ -1,0 +1,94 @@
+/* Appliquer un style global */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Card Design */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background-color: #084B8E;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+/* Tableau de classement */
+.table {
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table img.team-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Formulaire */
+.form-control {
+    background-color: #f1f3f5;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+}
+
+button.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+button.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Espacement et alignement */
+h1, h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Espace entre les boutons */
+}
+
+.button-column .btn {
+    width: 100%;  /* Tous les boutons auront la même largeur */
+}

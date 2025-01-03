@@ -1,0 +1,37 @@
+/* Classement table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    background-color: #084B8E;
+    color: white;
+    text-align: center;
+}
+
+tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Logo dans le tableau : taille uniforme et centrée */
+tr.table-row img.logo-img {
+    height: 40px !important;
+    width: 40px !important;
+    object-fit: contain !important;
+    border-radius: 50% !important;
+    border: 1px solid #ccc !important;
+    display: block !important;
+    margin: auto !important;
+}
+
+.logo-img-large {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid #084B8E;
+    display: block;
+    margin: 0 auto;
+}

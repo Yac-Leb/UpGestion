@@ -1,0 +1,132 @@
+h1 {
+    text-align: center;
+    color: #084B8E;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    background-color: #f8f8f8;
+}
+
+input:focus, select:focus {
+    border-color: #3d74f7; 
+    box-shadow: 0 0 8px rgba(61, 116, 247, 0.4);
+}
+
+
+button {
+    background-color: #3d74f7;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1e60e4;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+}
+
+label {
+    font-size: 1.1em;
+    color: #084B8E;
+    margin-bottom: 5px;
+}
+
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+input:invalid, select:invalid {
+    border-color: #ff0000; 
+}
+
+input:valid, select:valid {
+    border-color: #28a745; 
+}
+
+body {
+    background-color: #e3dfee;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3d74f7; 
+}
+
+/* Autres boutons */
+.btn-register {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: #3d74f7;
+    border: 1px solid #3d74f7;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-register:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+

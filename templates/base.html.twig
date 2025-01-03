@@ -1,17 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">      
+
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
+    
     <body>
+        <nav class="top-bar">
+            <div class="container">
+                <a href="{{ path('app_home') }}" class="btn align-icon-text"><span class="material-symbols-outlined">home</span>&nbsp;PSG.FR</a>
+                <a href="{{ path('app_boutique') }}" class="btn align-icon-text"><span class="material-symbols-outlined">shopping_bag</span>&nbsp;Boutique</a>
+                <a href="{{ path('app_classement') }}" class="btn align-icon-text"><span class="material-symbols-outlined">groups</span>&nbsp;Classement</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2 align-icon-text"><span class="material-symbols-outlined">star</span>&nbsp;Admin Panel</a>
+                {% endif %}
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                {% if app.user %}
+                    <span class="navbar-text">Bienvenue {{ app.user.nom }} {{ app.user.prenom }} !</span>
+                    <p></p>
+                {% else %}
+                    <span class="navbar-text">Bienvenue sur notre site</span>
+                {% endif %}
+
+
+                <div class="d-flex justify-content-center flex-grow-1">
+                    <img src="{{ asset('images/Paris_Saint-Germain_Logo.svg.png') }}" alt="Logo" style="height: 100px;">
+                </div>
+
+                <div class="ml-auto">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_panier') }}" class="btn btn-outline-primary"><span class="material-symbols-outlined">shopping_cart</span> ({{ app.session.get('panier')|length }}) </a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connexion</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-success ml-2">Inscription</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
         {% block body %}{% endblock %}
+
+        <!-- Bloc pour la section end page -->
+        <footer class="bg-dark text-white mt-5">
+            <div class="container text-center py-3">
+                <p class="text-white">&copy; 2025 PSG.FR - Tous droits réservés.</p>
+                <p><a  class="text-white">Contactez-nous</a> | <a  class="text-white">Mentions légales</a></p>
+            </div>
+        </footer>
+
+        {% block javascripts %}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        {% endblock %}
     </body>
 </html>

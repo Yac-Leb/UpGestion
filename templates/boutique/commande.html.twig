@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/commande.css') }}">
+{% endblock %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{{path ('app_panier')}}" class="btn_secondary_outline" >Retour</a>
+    <h1>Mes Commandes</h1>
+
+    {% if commandes is empty %}
+        <p>Vous n'avez pas encore passé de commande.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numéro de Commande</th>
+                    <th>Date de la Commande</th>
+                    <th>Articles</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.date|date('d/m/Y H:i') }}</td>
+                        <td>
+                            <ul>
+                                {% for article in commande.articles %}
+                                    <li>{{ article.titre }} - {{ article.size }} - {{ article.quantity }} x {{ article.prix }}€</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ commande.articles|reduce((carry, article) => carry + (article.prix * article.quantity), 0) }}€</td>
+                        <td>
+                            {% if commande.archive%}
+                            <span class="badge badge-success">Reçu !</span>
+                            {% else %}
+                            <span class="badge badge-secondary">en cours d'acheminement</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

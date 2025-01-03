@@ -1,0 +1,114 @@
+/* Ajout des styles pour le panier */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #084B8E;
+}
+
+a {
+    text-decoration: none;
+    color: #084B8E;
+    font-size: 16px;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #444;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e3dfee;
+}
+
+table th {
+    background-color: #084B8E;
+    color: white;
+    font-size: 18px;
+}
+
+table td {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e53d2d;
+}
+
+/* Affichage des boutons de redirection */
+p {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: right;
+    color: #333;
+}
+
+a.btn.btn-success {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+a.btn.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Message lorsque le panier est vide */
+p {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+/* Style pour les boutons de retour */
+a {
+    color: #084B8E;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+a:hover {
+    color: #444;
+}
+

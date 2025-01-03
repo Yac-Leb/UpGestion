@@ -1,0 +1,40 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/admin_panel/panel_all_commandes.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1>Liste des Articles</h1>
+
+<a href="{{path ('admin_add_article')}}" class="btn_secondary_outline" ><span class="material-symbols-outlined">history</span>Retour</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.prix }}</td>
+                <td>{{ article.description }}</td>
+                <td>
+                    <a href="{{ path('admin_edit_article', {id: article.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <form action="{{ path('admin_delete_article', {id: article.id}) }}" method="POST" style="display:inline-block;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

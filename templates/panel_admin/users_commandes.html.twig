@@ -1,0 +1,67 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Commandes de {{ user.nom }} {% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{{ path('admin_add_admin') }}" class="btn_secondary_outline"><span class="material-symbols-outlined">history</span>Retour</a>
+    <h1>Commandes de : {{ user.nom }} {{ user.prenom }}</h1>
+
+    {% if commandes is empty %}
+        <p>Aucune commande à été passé par ce compte.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numéro de Commande</th>
+                    <th>Date de la Commande</th>
+                    <th>Articles</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Modifier Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.date|date('d/m/Y H:i') }}</td>
+                        <td>
+                            <ul>
+                                {% for article in commande.articles %}
+                                    <li>{{ article.titre }} - {{ article.size }} - {{ article.quantity }} x {{ article.prix }}€</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ commande.articles|reduce((carry, article) => carry + (article.prix * article.quantity), 0) }}€</td>
+                        <td>
+                            {% if commande.archive %}
+                                <span class="badge badge-success">Reçu !</span>
+                            {% else %}
+                                <span class="badge badge-secondary">En cours d'acheminement</span>
+                            {% endif %}
+                        </td>
+                        <td class="d-flex mt-2"> 
+                            <form method="POST" action="{{ path('admin_update_archive', {id: commande.id}) }}" class="d-flex">
+                                <input type="hidden" name="_token" value="{{ csrf_token('archive_' ~ commande.id) }}">
+                                {% if commande.archive %}
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm mr-2">Marquer comme en cours</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-outline-success btn-sm mr-2">Marquer comme reçu</button>
+                                {% endif %}
+                            </form>
+                        
+                            {% if commande.archive %}
+                                <form method="POST" action="{{ path('admin_delete_commande', {id: commande.id}) }}" class="d-flex mt-2">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete_' ~ commande.id) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm"><span class="material-symbols-outlined">delete</span></button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/admin_panel/panel_add_admin.css') }}">
+    <style>
+        .userRow {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <!-- Formulaire de recherche -->
+    <form class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher par nom, prénom ou email" value="{{ app.request.query.get('search') }}">
+        </div>
+    </form>
+
+    <!-- Affichage des messages flash -->
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div id="userList">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                {% for user in users %}
+                    <tr class="userRow">
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.mail }}</td>
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.nom }}</td>
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.prenom }}</td>
+                        <td>
+                            <!-- Formulaire de modification de rôle sans redirection -->
+                            <form method="POST" action="{{ path('admin_update_role', { id: user.id }) }}">
+                                <select name="role" onchange="this.form.submit()">
+                                    <option value="ROLE_USER" {% if 'ROLE_USER' in user.roles %} selected {% endif %}>ROLE_USER</option>
+                                    <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %} selected {% endif %}>ROLE_ADMIN</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_delete_user', { id: user.id }) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');"><span class="material-symbols-outlined">delete</span></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun utilisateur trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            // Fonction de filtrage en temps réel
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val().toLowerCase();  // Récupère la valeur du champ de recherche
+
+                // Parcours chaque ligne du tableau
+                $('#userTableBody .userRow').each(function() {
+                    var userData = $(this).text().toLowerCase(); // Récupère le texte de chaque ligne
+                    if (userData.indexOf(searchTerm) === -1) {  // Si le texte ne contient pas le terme de recherche
+                        $(this).hide();  // Masque la ligne
+                    } else {
+                        $(this).show();  // Affiche la ligne
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

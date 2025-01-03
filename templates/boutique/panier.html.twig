@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/panier.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{{path ('app_home')}}" class="btn_secondary_outline" >Retour</a>
+    <a href="{{path ('app_commandes')}}" class="btn_primary_outline" >Mes commandes</a>
+    <h1>Votre Panier</h1>
+    {% if panier is empty %}
+        <p>Votre panier est vide.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Taille</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in panier %}
+                <tr>
+                    <td>{{ item.titre }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.prix }}€</td>
+                    <td>{{ item.prix * item.quantity }}€</td>
+                    <td>
+                        <form method="POST" action="{{ path('remove_from_panier', { 'index': loop.index0 }) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Total : 
+            {{ panier|reduce((carry, item) => carry + (item.prix * item.quantity), 0) }}€
+        </p>
+        <a href="{{ path('paiement') }}" class="btn btn-success">Passer au paiement via PayPal</a>
+    {% endif %}
+</div>
+{% endblock %}

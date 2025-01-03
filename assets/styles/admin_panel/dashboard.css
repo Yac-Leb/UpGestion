@@ -1,0 +1,140 @@
+/* Style des cartes */
+.card {
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #084B8E;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Style des tableaux */
+.table th, .table td {
+    vertical-align: middle;
+    padding: 12px;
+    text-align: left;
+}
+
+/* En-têtes de tableau avec couleur principale */
+.table thead {
+    background-color: #084B8E;
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table .btn {
+    margin-top: 5px;
+    padding: 6px 12px;
+}
+
+/* Mise en forme des boutons */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    padding: 6px 12px;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Alignement des colonnes */
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 0 0 48%;
+    margin-bottom: 20px;
+}
+
+/* Image du logo dans le tableau de classement */
+.ranking-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Styles spécifiques pour le tableau de classement */
+.ranking-table td {
+    vertical-align: middle;
+    text-align: center; /* Centre le texte dans chaque colonne */
+}
+
+/* Hover sur les lignes de classement */
+.ranking-table tbody tr:hover {
+    background-color: #e0e7f1;
+}
+
+/* Mise en forme des actions de suppression et ajout des couleurs principales */
+.table td .btn {
+    background-color: #084B8E;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 6px 12px;
+    transition: background-color 0.3s;
+}
+
+.table td .btn:hover {
+    background-color: #005f8a;
+}
+
+.table td .btn-sm {
+    padding: 4px 8px;
+}
+
+/* Styles pour les liens et boutons secondaires */
+a {
+    color: #084B8E;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #005f8a;
+    text-decoration: underline;
+}
+
+/* Responsive Design : pour les petits écrans */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .col {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .card-header {
+        font-size: 1.1rem;
+    }
+}

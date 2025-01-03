@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/boutique/article.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container detail-container">
+    <a href="#" class="btn_secondary_outline" onclick="history.back(); return false;">
+        <span class="material-symbols-outlined">history</span>Retour
+    </a>
+    <h1>{{ article.titre }}</h1>
+    <div class="detail-content">
+        <!-- Galerie d'images -->
+        <div class="image-gallery">
+            <img src="{{ asset('images/boutique/' ~ article.premiereImage) }}" 
+                 alt="{{ article.titre }}" 
+                 class="article-image">
+            <img src="{{ asset('images/boutique/' ~ article.deuxiemeImage) }}" 
+                 alt="{{ article.titre }}" 
+                 class="article-image">
+        </div>
+
+        <!-- Détails du produit -->
+        <div class="product-details">
+            <p class="price">{{ article.prix }}€</p>
+            <p>{{ article.description }}</p>
+
+            <form method="POST" action="{{ path('add_panier', {'id': article.id}) }}">
+                <div class="form-group">
+                    <label for="size">Taille:</label>
+                    <select id="size" name="size" class="form-control" required>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantité:</label>
+                    <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary add-to-cart">Ajouter au panier</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

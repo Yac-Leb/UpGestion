@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/accueil/accueil.css') }}">
+{% endblock %}
+
+
+{% block title %}Bienvenue sur notre site{% endblock %}
+
+{% block body %}
+<div class="container_accueil">
+
+    <header class="hero-section">
+      <h1 class="hero-title">Bienvenue sur le site officiel des supporters du PSG !</h1>
+      <p class="hero-description">
+        Découvrez les classements, résultats et joueurs de votre club favori.
+      </p>
+      <button class="cta-button" @click="scrollToHistory">En savoir plus sur l'histoire du club</button>
+    </header>
+
+    <section class="history-section" id="history">
+      <h2 class="history-title">L'histoire du Paris Saint-Germain</h2>
+      <p class="history-content">
+        Le Paris Saint-Germain (PSG) a été fondé en 1970 grâce à la fusion entre le Stade 
+        Saint-Germain et le Paris FC. Depuis ses débuts, le club est devenu une institution 
+        incontournable dans le monde du football, notamment grâce à ses performances et à sa 
+        popularité croissante.
+      </p>
+      <div class="history-image">
+        <img src="{{ asset('images/accueil/fondation-psg.jpg') }}" alt="Fondation du PSG" />
+        <p>Le PSG lors de ses premiers matchs en 1970.</p>
+      </div>
+      <p class="history-content">
+        Les années 80 ont marqué un tournant avec l'arrivée de grandes stars comme Safet 
+        Sušić, qui a transformé le jeu offensif du club. C’est aussi durant cette décennie 
+        que le PSG remporte son premier titre de Ligue 1, en 1986.
+      </p>
+      <div class="history-image">
+        <img src="{{ asset('images/accueil/psg-1986.jpg') }}" alt="PSG Champion 1986" />
+        <p>Les joueurs du PSG célébrant leur premier titre de Ligue 1 en 1986.</p>
+      </div>
+      <p class="history-content">
+        Avec l'arrivée du Qatar Sports Investments (QSI) en 2011, le PSG entre dans une 
+        nouvelle ère. Le club attire des stars internationales comme Neymar Jr., Kylian Mbappé, 
+        et Lionel Messi. Le Parc des Princes devient un véritable temple du football moderne.
+      </p>
+      <div class="history-image">
+        <img src="{{ asset('images/accueil/psg-2022.jpg') }}" alt="PSG Moderne" />
+        <p>Les stars actuelles du PSG célébrant leurs victoires.</p>
+      </div>
+      <p class="history-content">
+        Aujourd'hui, le PSG est reconnu comme l'un des meilleurs clubs au monde, avec un 
+        palmarès impressionnant comprenant des titres de Ligue 1, des Coupes nationales, 
+        et des performances remarquables en Ligue des Champions.
+      </p>
+    </section>
+  </div>
+{% endblock %}
