@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+{{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/login/register.css') }}">
 {% endblock %}
 
@@ -16,7 +17,7 @@
     {{ form_row(registerForm.nom) }}
     {{ form_row(registerForm.plainPassword) }}
 
-    <button class="btn">S'inscrire</button>
+    <button class="btn-register">S'inscrire</button>
 {{ form_end(registerForm) }}
 
 {% endblock %}

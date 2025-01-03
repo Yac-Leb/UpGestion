@@ -13,21 +13,66 @@ class Classement
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $logo = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $points = 0;
+
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(type: 'json')]
-    private array $classement = [];
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $description = null;
 
     public function __construct()
     {
         // Initialisation de la date à la création de l'entité
-        $this->date = new \DateTime(); // Optionnel si vous souhaitez un `date` par défaut
+        $this->date = new \DateTime(); // Définit la date et l'heure actuelles lors de la création
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
+
+        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -42,14 +87,14 @@ class Classement
         return $this;
     }
 
-    public function getClassement(): array
+    public function getDescription(): ?string
     {
-        return $this->classement;
+        return $this->description;
     }
 
-    public function setClassement(array $classement): self
+    public function setDescription(?string $description): self
     {
-        $this->classement = $classement;
+        $this->description = $description;
 
         return $this;
     }

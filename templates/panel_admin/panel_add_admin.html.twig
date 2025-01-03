@@ -3,6 +3,11 @@
 {% block stylesheets %}
     {{ parent() }}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .userRow {
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -36,10 +41,11 @@
             <tbody id="userTableBody">
                 {% for user in users %}
                     <tr class="userRow">
-                        <td>{{ user.mail }}</td>
-                        <td>{{ user.nom }}</td>
-                        <td>{{ user.prenom }}</td>
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.mail }}</td>
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.nom }}</td>
+                        <td onclick="window.location='{{ path('admin_user_commandes', { id: user.id }) }}'">{{ user.prenom }}</td>
                         <td>
+                            <!-- Formulaire de modification de rôle sans redirection -->
                             <form method="POST" action="{{ path('admin_update_role', { id: user.id }) }}">
                                 <select name="role" onchange="this.form.submit()">
                                     <option value="ROLE_USER" {% if 'ROLE_USER' in user.roles %} selected {% endif %}>ROLE_USER</option>

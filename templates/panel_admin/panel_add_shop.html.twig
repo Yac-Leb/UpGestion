@@ -4,50 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        .form-container {
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: #333;
-        }
-
-        .form-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-container input,
-        .form-container textarea,
-        .form-container button {
-            margin-bottom: 15px;
-        }
-
-        .form-container .btn-primary {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-        }
-
-        .form-container .alert {
-            margin-bottom: 15px;
-        }
-
-        .form-container .btn-secondary {
-            display: inline-block;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('styles/admin_panel/panel_boutique.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -65,33 +22,13 @@
         <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
 
-    <form action="{{ path('admin_add_article') }}" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="titre">Titre</label>
-            <input type="text" id="titre" name="titre" class="form-control" placeholder="Entrez le titre de l'article" required>
-        </div>
-
-        <div class="form-group">
-            <label for="prix">Prix</label>
-            <input type="number" step="0.01" id="prix" name="prix" class="form-control" placeholder="Entrez le prix de l'article" required>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" rows="5" placeholder="Entrez une description détaillée" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="premiere_image">Première Image</label>
-            <input type="file" id="premiere_image" name="premiere_image" class="form-control-file" accept="image/*" required>
-        </div>
-
-        <div class="form-group">
-            <label for="deuxieme_image">Deuxième Image</label>
-            <input type="file" id="deuxieme_image" name="deuxieme_image" class="form-control-file" accept="image/*" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Ajouter l'Article</button>
-    </form>
+    {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.premiere_image) }}
+        {{ form_row(form.deuxieme_image) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
 </div>
 {% endblock %}

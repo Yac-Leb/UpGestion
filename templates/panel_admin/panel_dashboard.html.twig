@@ -83,18 +83,20 @@
                         <th>Logo</th>
                         <th>Nom</th>
                         <th>Points</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for team in classement %}
+                    {% for classement in classements %}
                         <tr>
-                            <td><img src="{{ asset(team.logo) }}" alt="{{ team.name }} logo"></td>
-                            <td>{{ team.name }}</td>
-                            <td>{{ team.points }}</td>
+                            <td><img src="{{ asset('images/classement/' ~ classement.logo) }}" alt="{{ classement.nom }} logo" width="50"></td>
+                            <td>{{ classement.nom }}</td>
+                            <td>{{ classement.points }}</td>
+                            <td>{{ classement.description }}</td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="3">Aucun classement trouvé.</td>
+                            <td colspan="4">Aucun classement trouvé.</td>
                         </tr>
                     {% endfor %}
                 </tbody>

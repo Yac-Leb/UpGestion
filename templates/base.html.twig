@@ -19,7 +19,7 @@
             <div class="container">
                 <a href="{{ path('app_home') }}" class="btn">PSG.FR</a>
                 <a href="{{ path('app_boutique') }}" class="btn">Boutique</a>
-                <a href="#" class="btn">Classement</a>
+                <a href="{{ path('app_classement') }}" class="btn">Classement</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2">Admin Panel</a>
                 {% endif %}
@@ -41,7 +41,7 @@
 
                 <div class="ml-auto">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a href="{{ path('app_panier') }}" class="btn btn-outline-primary"><span class="material-symbols-outlined">shopping_cart</span></a>
+                        <a href="{{ path('app_panier') }}" class="btn btn-outline-primary"><span class="material-symbols-outlined">shopping_cart</span> ({{ app.session.get('panier')|length }}) </a>
                         <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">Déconnexion</a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connexion</a>
@@ -53,7 +53,7 @@
 
         {% block body %}{% endblock %}
 
-        <!-- Bloc pour la section "end page" -->
+        <!-- Bloc pour la section end page -->
         <footer class="bg-dark text-white mt-5">
             <div class="container text-center py-3">
                 <p class="text-white">&copy; 2025 PSG.FR - Tous droits réservés.</p>

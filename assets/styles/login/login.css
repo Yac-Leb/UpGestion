@@ -1,0 +1,135 @@
+/* Container pour la page de connexion */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Centrer le titre */
+h1 {
+    color: #084B8E;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Champs de saisie */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1em;
+    color: #084B8E;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Focus sur les champs */
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #3d74f7;
+    box-shadow: 0 0 5px rgba(61, 116, 247, 0.3);
+}
+
+/* Case à cocher */
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+/* Bouton de soumission */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #bcd6f7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3d74f7;
+    cursor: pointer;
+}
+
+/* Liens supplémentaires */
+.text-center a {
+    color: #084B8E;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Message d'erreur */
+.alert {
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Styling du bouton "Se souvenir de moi" (checkbox) */
+input[type=checkbox].alternative_checkbox {
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    height: 25px;
+    width: 50px;
+    background-color: #ffffff;
+    border-radius: 5rem;
+    transition: background-color .2s;
+    box-shadow: 0 0 15px #0000001e;
+}
+
+input[type=checkbox].alternative_checkbox::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(47, 47, 68);
+    transition: left .2s;
+}
+
+input[type=checkbox].alternative_checkbox:checked {
+    background-color: #62f7ad;
+}
+
+input[type=checkbox].alternative_checkbox:checked::after {
+    left: 70%;
+}

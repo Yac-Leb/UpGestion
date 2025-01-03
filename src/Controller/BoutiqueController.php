@@ -25,6 +25,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
+    
     #[Route('/boutique/article/{id}', name: 'article_detail')]
     public function articleDetail(EntityManagerInterface $entityManager, int $id): Response
     {

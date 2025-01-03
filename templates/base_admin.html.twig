@@ -23,7 +23,7 @@
             <a href="{{ path('app_panel_dashboard') }}" class="{% if app.request.get('_route') == 'app_panel_dashboard' %}btn_primary{% endif %}">
                 <i class="fas fa-tachometer-alt"></i><span class="material-symbols-outlined">dashboard</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Admin Panel</span>
             </a>
-            <a href="{{ path('admin_add_shop') }}" class="{% if app.request.get('_route') == 'admin_add_shop' or app.request.get('_route') == 'admin_shop' %}btn_primary{% endif %}">
+            <a href="{{ path('admin_add_article') }}" class="{% if app.request.get('_route') == 'admin_add_article' or app.request.get('_route') == 'admin_shop' %}btn_primary{% endif %}">
                 <i class="fas fa-store"></i><span class="material-symbols-outlined">shopping_cart</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Boutique</span>
             </a>
             <a href="{{ path('admin_add_admin') }}" class="{% if app.request.get('_route') == 'admin_add_admin' %}btn_primary{% endif %}">
