@@ -7,12 +7,12 @@ body {
 /* Card Design */
 .card {
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     margin-bottom: 30px;
 }
 
 .card-header {
-    background-color: #343a40;
+    background-color: #084B8E;
     color: #fff;
     font-size: 1.2rem;
     font-weight: bold;
@@ -35,7 +35,7 @@ body {
 }
 
 .table th {
-    background-color: #007bff;
+    background-color: #343a40;
     color: white;
 }
 
@@ -81,4 +81,14 @@ h1, h2 {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 20px;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Espace entre les boutons */
+}
+
+.button-column .btn {
+    width: 100%;  /* Tous les boutons auront la même largeur */
 }

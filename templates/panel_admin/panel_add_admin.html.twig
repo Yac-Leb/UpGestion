@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('styles/admin_panel/panel_add_admin.css') }}">
     <style>
         .userRow {
             cursor: pointer;
@@ -54,7 +54,7 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{ path('admin_delete_user', { id: user.id }) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            <a href="{{ path('admin_delete_user', { id: user.id }) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');"><span class="material-symbols-outlined">delete</span></a>
                         </td>
                     </tr>
                 {% else %}

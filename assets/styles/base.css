@@ -295,3 +295,10 @@ input[type=checkbox].alternative_checkbox:checked::after {
 .prescription_message {
     text-align: center;
 }
+
+
+.align-icon-text {
+    display: flex;
+    align-items: center;   
+    justify-content: center; 
+}

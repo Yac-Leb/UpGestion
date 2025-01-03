@@ -333,13 +333,14 @@ public function deleteTeam(int $index, EntityManagerInterface $entityManager): R
     return $this->redirectToRoute('admin_update_ranking');
 }
 
+// Votre contrôleur
 
 #[Route('/admin/update-ranking', name: 'admin_update_ranking')]
 #[IsGranted('ROLE_ADMIN')]
 public function index(ClassementRepository $classementRepository, Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
 {
-    // Récupérer toutes les équipes pour l'affichage
-    $teams = $classementRepository->findAll();
+    // Récupérer les équipes triées par points de manière décroissante
+    $teams = $classementRepository->findAllOrderedByPoints();
 
     // Vérifier si un ID d'équipe a été envoyé via le formulaire
     $teamId = $request->request->get('team_id');
@@ -400,6 +401,7 @@ public function index(ClassementRepository $classementRepository, Request $reque
         'team_id' => $teamId,
     ]);
 }
+
 
 
     // Supprimer une équipe

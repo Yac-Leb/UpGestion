@@ -17,11 +17,11 @@
     <body>
         <nav class="top-bar">
             <div class="container">
-                <a href="{{ path('app_home') }}" class="btn">PSG.FR</a>
-                <a href="{{ path('app_boutique') }}" class="btn">Boutique</a>
-                <a href="{{ path('app_classement') }}" class="btn">Classement</a>
+                <a href="{{ path('app_home') }}" class="btn align-icon-text"><span class="material-symbols-outlined">home</span>&nbsp;PSG.FR</a>
+                <a href="{{ path('app_boutique') }}" class="btn align-icon-text"><span class="material-symbols-outlined">shopping_bag</span>&nbsp;Boutique</a>
+                <a href="{{ path('app_classement') }}" class="btn align-icon-text"><span class="material-symbols-outlined">groups</span>&nbsp;Classement</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2">Admin Panel</a>
+                    <a href="{{ path('app_panel_dashboard') }}" class="btn btn_danger mr-2 align-icon-text"><span class="material-symbols-outlined">star</span>&nbsp;Admin Panel</a>
                 {% endif %}
             </div>
         </nav>

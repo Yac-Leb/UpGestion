@@ -27,13 +27,13 @@
                             <tr>
                                 <td>
                                     <img src="{{ asset('images/classement/' ~ team.logo) }}" alt="{{ team.nom }}" class="team-logo">
-                                </td>                                
+                                </td>
                                 <td>{{ team.nom }}</td>
                                 <td>{{ team.points }}</td>
                                 <td>{{ team.description }}</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm btn-edit" data-id="{{ team.id }}" data-nom="{{ team.nom }}" data-points="{{ team.points }}" data-logo="{{ team.logo }}" data-description="{{ team.description }}">Modifier</button>
-                                    <a href="{{ path('classement_supprimer', { 'id': team.id }) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                                <td class="button-column">
+                                    <button class="btn btn-primary btn-sm btn-edit" data-id="{{ team.id }}" data-nom="{{ team.nom }}" data-points="{{ team.points }}" data-logo="{{ team.logo }}" data-description="{{ team.description }}"><span class="material-symbols-outlined">edit</span></button>
+                                    <a href="{{ path('classement_supprimer', { 'id': team.id }) }}" class="btn btn-danger btn-sm"><span class="material-symbols-outlined">delete</span></a>
                                 </td>
                             </tr>
                         {% else %}
@@ -42,7 +42,7 @@
                             </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>                
             </div>
         </div>
 

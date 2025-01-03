@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block body %}
+
 <div class="container detail-container">
+    <a href="#" class="btn_secondary_outline" onclick="history.back(); return false;">
+        <span class="material-symbols-outlined">history</span>Retour
+    </a>
     <h1>{{ article.titre }}</h1>
     <div class="detail-content">
         <!-- Galerie d'images -->

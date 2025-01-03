@@ -27,13 +27,11 @@ class ClassementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // Exemple de méthode pour récupérer le dernier classement
-    public function findLastClassement(): ?Classement
+    public function findAllOrderedByPoints()
     {
         return $this->createQueryBuilder('c')
-            ->orderBy('c.date', 'DESC')
-            ->setMaxResults(1)
+            ->orderBy('c.points', 'DESC')  // Tri décroissant par points
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }
